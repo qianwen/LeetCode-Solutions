@@ -13,7 +13,7 @@ public class TreeNode {
 }
 
 public class InorderTraversal {
-	// iteratively 
+	// iteratively O(n) space
     // Answers came from http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/
 	public ArrayList<Integer> inorderTraversal(TreeNode root) {
         // IMPORTANT: Please reset any member data you declared, as
@@ -50,26 +50,23 @@ public class InorderTraversal {
 
     // Morris algorithm Time: O(nlogn) but space O(1)
 	public ArrayList<Integer> inorderTraversal2(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
 		ArrayList<Integer> res = new ArrayList<Integer>();
-		TreeNode cur = root, next = null;
+		TreeNode cur = root, prev = null;
 		while (cur != null){
 			if (cur.left != null){
-				next = cur;
-				cur = cur.left;
+				prev = cur.left;
 
-				TreeNode temp = cur;
-				while (temp.right != null && temp.right != next){
-					temp = temp.right;
+				while (prev.right != null && prev.right != cur){
+					prev = prev.right;
 				}    
 
-				if (temp.right == null){
-					temp.right = next;
+				if (prev.right == null){
+					prev.right = cur;
+					cur = cur.left;
 				} else {
-					temp.right = null;
-					res.add(next.val);
-					cur = next.right;
+					res.add(cur.val);
+					prev.right = null;
+					cur = cur.right;
 				}
 			} else {
 				res.add(cur.val);
@@ -79,4 +76,21 @@ public class InorderTraversal {
 
 		return res;
 	}
+
+	// Recursive
+	public ArrayList<Integer> inorderTraversal3(TreeNode root) {
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		recursion(root, res);  
+       	return ret;  
+    }  
+      
+    public void recursion(TreeNode root, ArrayList<Integer> res){  
+        if(root == null){  
+            return;  
+        }  
+          
+        recursion(root.left, res);  
+        res.add(root.val);  
+        recursion(root.right, res);  
+    }  
 }
