@@ -43,6 +43,7 @@ public class SearchInsert {
             } else {  
                 end = mid-1;  
             }  
+    
         }  
 
         return start;  

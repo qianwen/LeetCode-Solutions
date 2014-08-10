@@ -17,8 +17,8 @@ public class SingleNumber2 {
     public static int SingleNumber2(int[] A) {
         int res = 0;
         int[] count = new int[32];
-        for(int i = 0; i < 32; i++){
-            for(int j = 0;j<A.length;j++){
+        for (int i = 0; i < 32; i++){
+            for (int j = 0; j< A.length; j++){
                 int newNumber = 0;
                 newNumber = A[j] >> i;
 
@@ -26,7 +26,7 @@ public class SingleNumber2 {
                    count[i] = count[i]+1;
                }
            }
-           if ((count[i]%3)!= 0) {
+           if ((count[i]%3) != 0) {
             res = res|(1<<i);
            }
        }
